@@ -25,6 +25,7 @@ def retrieve_history(codes: List, period, interval) -> dict:
 
 def get_mean_varcov(stock_history: dict):
     """
+    Input orginal stock historical data
     dof = n-1
     """
     returns_data = pd.concat(
@@ -40,8 +41,21 @@ def get_mean_varcov(stock_history: dict):
 
 
 if __name__ == '__main__':
-    stock_history = retrieve_history(['MSFT', 'AAPL'], '1mo', '1wk')    
-    print(get_mean_varcov(stock_history))
+    # stock_history = retrieve_history(['MSFT', 'AAPL'], '1mo', '1wk')    
+    # print(get_mean_varcov(stock_history))
 
+    period = '3mo'
+    interval = '1wk'
+    asx200_list = pd.read_csv('assets/ASX200_companies_list.csv')
+
+    stock_history = retrieve_history(asx200_list['Yahoo Code'][:10], period, interval)
+    mean_returns, varcov_returns = get_mean_varcov(stock_history)
+
+    # store the returns of stocks
+    returns_data = pd.concat(
+        [data['Return'] for data in stock_history.values()], 
+        axis=1, keys=stock_history.keys()
+    )
+    returns_data.to_csv('simple_opt/stock_returns.csv')
 
 
