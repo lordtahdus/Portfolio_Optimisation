@@ -44,11 +44,11 @@ if __name__ == '__main__':
     # stock_history = retrieve_history(['MSFT', 'AAPL'], '1mo', '1wk')    
     # print(get_mean_varcov(stock_history))
 
-    period = '3mo'
+    period = '1y'
     interval = '1wk'
     asx200_list = pd.read_csv('assets/ASX200_companies_list.csv')
 
-    stock_history = retrieve_history(asx200_list['Yahoo Code'][:10], period, interval)
+    stock_history = retrieve_history(asx200_list['Yahoo Code'][[0,3]], period, interval)
     mean_returns, varcov_returns = get_mean_varcov(stock_history)
 
     # store the returns of stocks
