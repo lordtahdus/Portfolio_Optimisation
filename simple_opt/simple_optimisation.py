@@ -58,7 +58,7 @@ MATRIX FORM
 m = GEKKO(remote=False)
 # Variables (in matrix form)
 b = m.Array(m.Var, len(mean), value=0.1, lb=0, ub=1)
-# Constraint in matrix form
+# Constraint (in matrix form)
 m.Equation(np.sum(b) == 1)
 
 # obj = b*mean*(b*varcov*b).T
