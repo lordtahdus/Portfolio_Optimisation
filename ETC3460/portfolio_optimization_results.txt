@@ -1,0 +1,12 @@
+Combination: ('SUN', 'BWP')
+Optimized_b: [0.77358137 0.22641863]
+Optimized Objective: 4.0371307912978525
+Optimized Returns: 0.0005201238234645071
+Minimum Variance: 0.0001288350193126387
+
+Combination: ('WBC', 'BWP')
+Optimized_b: [0.89999758 0.10000242]
+Optimized Objective: 1.61908091203672
+Optimized Returns: 0.0002038804259374396
+Minimum Variance: 0.00012592355602597313
+

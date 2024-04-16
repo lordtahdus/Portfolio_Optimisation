@@ -18,10 +18,10 @@ def retrieve_history(codes: List, period, interval) -> dict:
         # add return
         # data['Return'] = (data['Close'] - data['Open']) / data['Open'] * 100
         data['Return'] = (data['Close'] - data['Open']) / data['Open'] * 100
-        data['Log_Return'] = np.log(data['Close'][1:] / data['Close'][:-1])
+        data['Log_Return'] = np.log(data['Close'] / data['Close'].shift(1))
         # drop unnecessary cols
         data.drop(['Dividends', 'Stock Splits'], axis=1)
-        stock_history[code] = data
+        stock_history[code[:-3]] = data
     return stock_history
 
 
@@ -46,18 +46,25 @@ if __name__ == '__main__':
     # stock_history = retrieve_history(['MSFT', 'AAPL'], '1mo', '1wk')    
     # print(get_mean_varcov(stock_history))
 
-    period = '1y'
-    interval = '1wk'
-    asx200_list = pd.read_csv('assets/ASX200_companies_list.csv')
+    """============= INPUT PARAMETERS =============="""
 
-    stock_history = retrieve_history(asx200_list['Yahoo Code'][[0,3]], period, interval)
-    mean_returns, varcov_returns = get_mean_varcov(stock_history)
+    period = '3y'
+    interval = '1d'
+    # today = pd.to_datetime('2024-03-24')
+
+    """============================================="""
+
+    comp_list = pd.read_csv('ETC3460/companies_list.csv')
+
+    stock_history = retrieve_history(comp_list['Yahoo Code'], period, interval)
+    # mean_returns, varcov_returns = get_mean_varcov(stock_history)
 
     # store the returns of stocks
     returns_data = pd.concat(
-        [data['Return'] for data in stock_history.values()], 
+        [data['Log_Return'] for data in stock_history.values()], 
         axis=1, keys=stock_history.keys()
     )
-    returns_data.to_csv('simple_opt/stock_returns.csv')
+    returns_data.to_csv('ETC3460/stock_log_returns.csv')
+
 
 
