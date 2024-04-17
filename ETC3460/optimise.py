@@ -8,13 +8,8 @@ from typing import List
 from gekko import GEKKO
 
 
-
-
-
 stock_returns = pd.read_csv('ETC3460\stock_log_returns.csv', index_col='Date')
-
-# Example data: 6 industries with 3 stocks each
-
+# 6 industries with 3 stocks each
 industries = {
     'Financials': ['SUN', 'WBC', 'CBA'],
     'Real Estate': ['BWP', 'GPT', 'MGR'],
@@ -22,7 +17,8 @@ industries = {
     'Energy': ['STO', 'VEA', 'WDS'],
     'Health Care': ['SHL', 'FPH', 'CSL'],
     'Consumer Staples': ['TWE', 'GNC', 'WOW']
-}
+}   
+combinations = list(itertools.product(*industries.values()))
 
 # industries = {
 #     'Financials': ['SUN', 'WBC'],
@@ -30,7 +26,7 @@ industries = {
 # }
 
 # Generate all combinations of selecting one stock from each industry
-combinations = list(itertools.product(*industries.values()))
+
 
 
 # mean = np.array(stock_returns.mean()) # vector of means of returns
@@ -41,7 +37,7 @@ combinations = list(itertools.product(*industries.values()))
 
 
 '''
-MATRIX FORM
+Testing
 '''
 
 # selected_stocks = ['SUN', 'BWP']
@@ -72,7 +68,9 @@ MATRIX FORM
 
 
 
-
+"""
+Real stuffs
+"""
 
 results = []
 
@@ -117,7 +115,10 @@ for combination in combinations:
 
 # Write results to a CSV file
 with open('ETC3460/portfolio_optimization_results.csv', 'w', newline='') as csvfile:
-    fieldnames = ['Combination', 'Optimized_b', 'Optimized_Objective', 'Optimized_Returns', 'Minimum_Variance']
+    fieldnames = [
+        'Combination', 'Optimized_b', 'Optimized_Objective', 
+        'Optimized_Returns', 'Minimum_Variance'
+    ]
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
     
     writer.writeheader()
