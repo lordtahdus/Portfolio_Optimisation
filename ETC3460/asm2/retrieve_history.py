@@ -1,6 +1,7 @@
 import yfinance as yf
 import numpy as np
 import pandas as pd
+import ast
 from typing import List
 
 def retrieve_history(codes: List, period, interval, start=None, end=None) -> dict:
@@ -23,23 +24,26 @@ if __name__ == '__main__':
 
     period = '3y'
     interval = '1d'
-    today = pd.to_datetime('2024-04-16')
-    comp_list = pd.read_csv('ETC3460/companies_list.csv')
+    start = '2021-04-16'
+    end = '2024-05-07'
+    comp_list = pd.read_csv('ETC3460/asm2/best_portfolio.csv')
     
     """============================================="""
 
-    # start_time = today - pd.Timedelta(days = 4*7)
-    end_time = today
-    # start_time = str(start_time) + '+00:00'
-    end_time = str(end_time) + '+00:00'
+    # transform to right format
+    comp_list = list(
+        ast.literal_eval(comp_list['Combination'][0])
+    )
+    yahoo_code = [code + ".AX" for code in comp_list]
 
-    stock_history = retrieve_history(comp_list['Yahoo Code'], period, interval, start_time, end_time)
+    # retrieve
+    stock_history = retrieve_history(yahoo_code, period, interval, start, end)
     # store the returns of stocks
     returns_data = pd.concat(
         [data['Log_Return'] for data in stock_history.values()], 
         axis=1, keys=stock_history.keys()
     )
-    returns_data.to_csv('ETC3460/stock_log_returns.csv')
+    returns_data.to_csv('ETC3460/asm2/holdingperiod_log_returns.csv')
 
 
 

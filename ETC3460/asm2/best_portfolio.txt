@@ -1,0 +1,6 @@
+Combination: ('SUN', 'BWP', 'CPU', 'VEA', 'CSL', 'GNC')
+Optimized_b: [0.2169 0.1    0.2462 0.237  0.1    0.1   ]
+Optimized_Objective: 9.030287254916072
+Optimized_Returns: 0.07054526606851
+Minimum_Variance: 0.7812073312519506
+Standard_Deviation: 0.8838593390647352
