@@ -25,7 +25,7 @@ if __name__ == '__main__':
     period = '3y'
     interval = '1d'
     start = '2021-04-16'
-    end = '2024-05-07'
+    end = '2024-05-11'
     comp_list = pd.read_csv('ETC3460/asm2/best_portfolio.csv')
     
     """============================================="""
