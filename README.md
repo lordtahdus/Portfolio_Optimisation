@@ -1,4 +1,4 @@
-*(This is a university assignment)*
+*(This is an extension from university assignment)*
 
 A simple Portfolio Optimisation problem: Mean-variance method with additional constraints
 
